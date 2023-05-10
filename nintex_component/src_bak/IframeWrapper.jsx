@@ -13,7 +13,7 @@ class IFrameWrapper extends reactToWebComponent(IFrame, React, ReactDOM, {
       fallbackDisableSubmit: false,
       description: "IFrame component which can render url view with the frame",
       iconUrl: "one-line-text",
-      groupName: "Custom Component",
+      groupName: "Visual",
       version: "1.0",
       properties: {
         src: {
