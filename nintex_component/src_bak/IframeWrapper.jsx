@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import reactToWebComponent from "react-to-webcomponent";
-import { IFrame, PieChart } from "./Iframe";
+import { IFrame } from "./Iframe";
 
-class IFrameWrapper extends reactToWebComponent(PieChart, React, ReactDOM, {
+class IFrameWrapper extends reactToWebComponent(IFrame, React, ReactDOM, {
   shadow: "open",
   props: ["name", "title", "src", "height"],
 }) {

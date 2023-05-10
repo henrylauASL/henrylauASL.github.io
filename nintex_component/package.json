@@ -20,7 +20,9 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "chart.js": "^4.3.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-to-webcomponent": "^2.0.0-alpha.0"
   }
