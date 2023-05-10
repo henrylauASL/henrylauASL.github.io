@@ -54,9 +54,7 @@ export const IFrame = ({
   return (
     <>
       <style>{styles}</style>
-      <div style={{pieStyle}}>
-        <PieChart />
-      </div>
+      <PieChart />
     </>
   );
 };
