@@ -31,51 +31,32 @@ export const data = {
   ],
 };
 
-// export function PieChart() {
-//   return <Pie data={data} />;
-// }
 
 export function PieChart() {
-  return (
-    <>
-       <style>{styles}</style>
-       <Pie data={data} />
-    </>
-  )
+  return <Pie data={data} />;
 }
 
-// export const IFrame = ({
-//   name = "wikipedia",
-//   title = "Wikipedia",
-//   src = "https://www.wikipedia.org/",
-//   height = "100%",
-// }) => {
-//   const styles = `
-//   :host {
-//     height: 100%;
-//     width: 100%;
-//     display: block;
-//   }
-//   .frame {
-//     display: inline-block;
-//     height: 100%;
-//     width: 100%;
-//     background-color: transparent;
-//     border: none;
-//   }`;
+export const IFrame = ({
+}) => {
+  const styles = `
+  :host {
+    height: 50%;
+    width: 50%;
+    display: Flex;
+  }`;
+  
+  const pieStyle = `
+  :host {
+    height: 50%;
+    width: 50%;
+  }`;
 
-//   const elementStyles = { height: height };
-
-//   return (
-//     <>
-//       <style>{styles}</style>
-//       <iframe
-//         className="frame"
-//         style={elementStyles}
-//         name={name}
-//         title={title}
-//         src={src}
-//       ></iframe>
-//     </>
-//   );
-// };
+  return (
+    <>
+      <style>{styles}</style>
+      <div style={{pieStyle}}>
+        <PieChart />
+      </div>
+    </>
+  );
+};
