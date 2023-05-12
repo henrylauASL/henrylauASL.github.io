@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "outDir": "dist",
+      "esModuleInterop": true,
+      "target": "es6",
+      "module": "commonjs",
+      
+    },
+    "exclude": [
+      "**/*test.ts"
+    ]
+  
+    
+  }
+  

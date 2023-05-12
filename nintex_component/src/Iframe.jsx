@@ -44,9 +44,9 @@ export const IFrame = ({
 }) => {
   const styles = `
   :host {
-    height: 50%;
+    height: 100%;
     width: 100%;
-    display: block;
+    display: Flex;
   }
   .frame {
     display: inline-block;
@@ -67,8 +67,8 @@ export const IFrame = ({
         name={name}
         title={title}
         src={src}
-      ></iframe>
-      <PieChart/>
+      ><PieChart/></iframe>
+
     </>
   );
 };
