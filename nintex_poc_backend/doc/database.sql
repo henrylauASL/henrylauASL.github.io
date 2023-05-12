@@ -1,11 +1,11 @@
 CREATE TABLE [dbo].[caseDetails](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[caseTitle] [varchar](100) NOT NULL,
-    [caseDescription] [varchar](100) NULL,
+    [caseDescription] [varchar](5000) NULL,
     [attachment] [varchar](500) NULL,
     [natureOfComplaint] [varchar](100) NULL,
     [moreOptions] [varchar](100) NULL,
-	[remarks] [varchar](500) NULL,
+	[remarks] [varchar](5000) NULL,
     [caseProgress] [varchar](100) NULL,
     [dateOfReceipt] [date] NULL,
     [dateOfAcknowledgement] [date] NULL,

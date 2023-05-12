@@ -5,7 +5,7 @@ export class CaseController {
     constructor(private caseService: CaseService){}
     createCase = async (req: Request, res: Response) => {
         try{
-            console.log(req.body);
+            console.log("body", req.body);
             return res.json(await this.caseService.createCase(req.body))
         }
         catch (err){
