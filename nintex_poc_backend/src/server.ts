@@ -18,7 +18,7 @@ const config: sql.config = {
   server: process.env.db_server,
   database: process.env.db_database,
   options: {
-    encrypt: false // for Azure users
+    encrypt: true // for Azure users
   }
 };
 

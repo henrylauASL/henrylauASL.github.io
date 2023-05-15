@@ -1,5 +1,16 @@
-import { caseType } from '../model/caseType'
-import { connectToDatabase } from '../src/server';
+import { connectToDatabase } from '../../src/server';
+
+type caseType = {
+  caseTitle: string,
+  caseDescription: string,
+  natureOfComplaint: string,
+  moreOptions: string,
+  remarks: string,
+  caseProgress: string,
+  dateOfReceipt: string,
+  dateOfAcknowledgement: string,
+  substantiveReply: string,
+}
 
 let time = new Date(Date.now());
 export class CaseService {
