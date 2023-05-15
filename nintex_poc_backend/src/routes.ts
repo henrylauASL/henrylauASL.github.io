@@ -1,7 +1,7 @@
 import { Router } from "express";
-import express from 'express';
-import { CaseController } from "../controller/caseController";
-import { CaseService } from "../service/caseService";
+import { CaseService } from "./service/caseService";
+import { CaseController } from "./controller/caseController";
+
 
 export const routes = Router();
 
