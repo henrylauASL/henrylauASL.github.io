@@ -12,4 +12,23 @@ export class CaseController {
             return res.status(500).json({msg: err})
         }
     }
+
+    getCase = async (req: Request, res: Response) => {
+        try{
+            return res.json(await this.caseService.getCase())
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
+
+    getCasebyID = async (req: Request, res: Response) => {
+        let id = req.params.id
+        try{
+            return res.json(await this.caseService.getCasebyID(id))
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
 } 
