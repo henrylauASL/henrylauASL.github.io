@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { createStyles, Navbar, Group, Code, getStylesRef, rem } from '@mantine/core';
+import { createStyles, Navbar, getStylesRef, rem } from '@mantine/core';
 import {
+  IconBriefcase,
   IconChartBar,
   IconFiles,
   IconLogout,
 } from '@tabler/icons-react';
-import { MantineLogo } from '@mantine/ds';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -63,21 +63,22 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { link: '', label: 'Dashboard', icon: IconChartBar },
-  { link: '', label: 'Case Management', icon: IconFiles },
+  { url: '/', label: 'My Case', icon: IconBriefcase },
+  { url: '/dashboard', label: 'Dashboard', icon: IconChartBar },
+  { url: '/case_management', label: 'Case Management', icon: IconFiles },
 ];
 
 export function Menu() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('Dashboard');
+  const [active, setActive] = useState('My Case');
 
   const links = data.map((item) => (
     <a
       className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-      href={item.link}
+      href={item.url}
       key={item.label}
       onClick={(event) => {
-        event.preventDefault();
+        // event.preventDefault();
         setActive(item.label);
       }}
     >

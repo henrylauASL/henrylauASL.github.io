@@ -9,6 +9,7 @@ import {
   Center,
   TextInput,
   rem,
+  Button,
 } from '@mantine/core';
 import { keys } from '@mantine/utils';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
@@ -35,12 +36,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface RowData {
-  name: string;
-  email: string;
-  company: string;
+  caseID: string;
+  caseTitle: string;
+  caseDescription: string;
+  caseStatus: string;
 }
 
-interface TableSortProps {
+export interface TableSortProps {
   data: RowData[];
 }
 
@@ -99,7 +101,7 @@ function sortData(
   );
 }
 
-export function ResultTable({ data }: TableSortProps) {
+export function TableSort({ data }: TableSortProps) {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState<keyof RowData | null>(null);
@@ -119,10 +121,13 @@ export function ResultTable({ data }: TableSortProps) {
   };
 
   const rows = sortedData.map((row) => (
-    <tr key={row.name}>
-      <td>{row.name}</td>
-      <td>{row.email}</td>
-      <td>{row.company}</td>
+    <tr key={row.caseID}>
+      {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
+      <td style={{display: 'flex', justifyContent: 'center'}}><Button>Edit</Button></td>
+      <td>{row.caseID}</td>
+      <td>{row.caseTitle}</td>
+      <td>{row.caseDescription}</td>
+      <td>{row.caseStatus}</td>
     </tr>
   ));
 
@@ -135,29 +140,42 @@ export function ResultTable({ data }: TableSortProps) {
         value={search}
         onChange={handleSearchChange}
       />
-      <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} sx={{ tableLayout: 'fixed' }}>
+      <Table withBorder horizontalSpacing="xs" verticalSpacing="xs" miw={700} sx={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-            <Th
-              sorted={sortBy === 'name'}
+          <Th
+              sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('name')}
+              onSort={() => setSorting('caseID')}
             >
-              Name
+            </Th>
+          <Th
+              sorted={sortBy === 'caseID'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('caseID')}
+            >
+              Case ID
             </Th>
             <Th
-              sorted={sortBy === 'email'}
+              sorted={sortBy === 'caseTitle'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('email')}
+              onSort={() => setSorting('caseTitle')}
             >
-              Email
+              Case Title
             </Th>
             <Th
-              sorted={sortBy === 'company'}
+              sorted={sortBy === 'caseDescription'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('company')}
+              onSort={() => setSorting('caseDescription')}
             >
-              Company
+              Case Description
+            </Th>
+            <Th
+              sorted={sortBy === 'caseStatus'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('caseStatus')}
+            >
+              Case Status
             </Th>
           </tr>
         </thead>
