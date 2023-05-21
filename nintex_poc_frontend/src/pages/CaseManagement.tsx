@@ -23,6 +23,7 @@ export default function CaseManagement() {
 
     return (
         <div>
+            <h2>Case Management</h2>
             <TableSort data={data}/>
         </div>
     );

@@ -30,11 +30,11 @@ export default function Main() {
           <Menu />
         </Navbar>
       }
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
+      // footer={
+      //   <Footer height={60} p="md">
+      //     Application footer
+      //   </Footer>
+      // }
       header={
         <Header height={{ base: 50, md: 70 }} p="md">
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
@@ -48,7 +48,7 @@ export default function Main() {
               />
             </MediaQuery>
 
-            <Text>Application header</Text>
+            <h2>Case Management System</h2>
           </div>
         </Header>
       }

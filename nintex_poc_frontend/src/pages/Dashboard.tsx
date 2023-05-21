@@ -32,6 +32,7 @@ const data : StatsRingProps['data'] = [
 export default function Dashboard() {
   return (
     <div>
+      <h2>Dashboard</h2>
         <StatsRing data={ data }/>
       <Grid display="flex" justify="space-around">
         <Grid.Col lg={7.5} md={6}>

@@ -6,6 +6,7 @@ import {
   IconFiles,
   IconLogout,
 } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -73,18 +74,30 @@ export function Menu() {
   const [active, setActive] = useState('My Case');
 
   const links = data.map((item) => (
-    <a
-      className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-      href={item.url}
-      key={item.label}
-      onClick={(event) => {
-        // event.preventDefault();
-        setActive(item.label);
-      }}
-    >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label}</span>
-    </a>
+    // <Link
+    //   className={cx(classes.link, { [classes.linkActive]: item.label === active })}
+    //   to={item.url}
+    //   key={item.label}
+    //   onClick={(event) => {
+    //     // event.preventDefault();
+    //     setActive(item.label);
+    //   }}
+    // >
+    //   <item.icon className={classes.linkIcon} stroke={1.5} />
+    //   <span>{item.label}</span>
+    // </Link>
+        <a
+        className={cx(classes.link, /*{ [classes.linkActive]: item.label === active }*/)}
+        href={item.url}
+        key={item.label}
+        onClick={(event) => {
+          // event.preventDefault();
+          // setActive(item.label);
+        }}
+      >
+        <item.icon className={classes.linkIcon} stroke={1.5} />
+        <span>{item.label}</span>
+      </a>
   ));
 
   return (
