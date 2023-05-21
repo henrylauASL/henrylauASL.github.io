@@ -36,6 +36,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface RowData {
+  GUID: string;
   caseID: string;
   caseTitle: string;
   caseDescription: string;
@@ -123,7 +124,7 @@ export function TableSort({ data }: TableSortProps) {
   const rows = sortedData.map((row) => (
     <tr key={row.caseID}>
       {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
-      <td style={{display: 'flex', justifyContent: 'center'}}><Button>Edit</Button></td>
+      <td style={{display: 'flex', justifyContent: 'center'}}><Button onClick={()=>console.log(row.GUID)}>Edit</Button></td>
       <td>{row.caseID}</td>
       <td>{row.caseTitle}</td>
       <td>{row.caseDescription}</td>
