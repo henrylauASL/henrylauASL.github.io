@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   createStyles,
   Table,
@@ -35,12 +35,12 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface RowData {
+export interface RowData {
   GUID: string;
   caseID: string;
   caseTitle: string;
   caseDescription: string;
-  caseStatus: string;
+  caseProgress: string;
 }
 
 export interface TableSortProps {
@@ -115,6 +115,10 @@ export function TableSort({ data }: TableSortProps) {
     setSortedData(sortData(data, { sortBy: field, reversed, search }));
   };
 
+  useEffect(()=>{
+    setSortedData(data);
+  },[data])
+  
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
@@ -128,7 +132,7 @@ export function TableSort({ data }: TableSortProps) {
       <td>{row.caseID}</td>
       <td>{row.caseTitle}</td>
       <td>{row.caseDescription}</td>
-      <td>{row.caseStatus}</td>
+      <td>{row.caseProgress}</td>
     </tr>
   ));
 
@@ -172,9 +176,9 @@ export function TableSort({ data }: TableSortProps) {
               Case Description
             </Th>
             <Th
-              sorted={sortBy === 'caseStatus'}
+              sorted={sortBy === 'caseProgress'}
               reversed={reverseSortDirection}
-              onSort={() => setSorting('caseStatus')}
+              onSort={() => setSorting('caseProgress')}
             >
               Case Status
             </Th>

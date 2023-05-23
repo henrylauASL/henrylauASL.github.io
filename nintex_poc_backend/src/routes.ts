@@ -10,4 +10,7 @@ const caseController = new CaseController(caseService);
 
 routes.get('/getCase', caseController.getCase)
 routes.get('/getCasebyID/:id', caseController.getCasebyID)
+routes.get('/getNumberOfCaseStatus', caseController.getNumberOfCaseStatus)
+routes.get('/getCaseMonth', caseController.getCaseMonth)
+routes.get('/getDistrict', caseController.getDistrict)
 routes.post('/createCase', caseController.createCase)

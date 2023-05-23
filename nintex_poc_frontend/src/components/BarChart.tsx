@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -32,46 +32,47 @@ export const options = {
   },
 };
 
-// const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 const lastYear = [
-  {month: 'January', count: 10},
-  {month: 'February', count: 99},
-  {month: 'March', count: 77},
-  {month: 'April', count: 69},
-  {month: 'May', count: 80},
-  {month: 'June', count: 99},
-  {month: 'July', count: 91},
-  {month: 'August', count: 88},
-  {month: 'September', count: 76},
-  {month: 'October', count: 88},
-  {month: 'November', count: 52},
-  {month: 'December', count: 70},
+  {month: 'January', count: 5},
+  {month: 'February', count: 8},
+  {month: 'March', count: 10},
+  {month: 'April', count: 8},
+  {month: 'May', count: 12},
+  {month: 'June', count: 16},
+  {month: 'July', count: 17},
+  {month: 'August', count: 9},
+  {month: 'September', count: 30},
+  {month: 'October', count: 23},
+  {month: 'November', count: 18},
+  {month: 'December', count: 29},
 ]
-
-const thisYear = [
-  {month: 'January', count: 33},
-  {month: 'February', count: 89},
-  {month: 'March', count: 58},
-  {month: 'April', count: 64},
-  {month: 'May', count: 70},
-]
-
-export const data = {
-  labels : lastYear.map((x)=>x.month),
-  datasets: [
-    {
-      label: '2022',
-      data: lastYear.map((x) => x.count),
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    },
-    {
-      label: '2023',
-      data: thisYear.map((x) => x.count),
-      backgroundColor: 'rgba(53, 162, 235, 0.5)',
-    },
-  ],
-};
 
 export function BarChart() {
+  const [thisYear, setThisYear] = useState<any>([]);
+  useEffect(()=>{
+    fetch(`http://localhost:8000/getCaseMonth `)
+    .then((res)=>res.json())
+    .catch((err)=>({error: String(err)}))
+    .then((json)=> {
+      console.log("getCaseMonth", json.recordset)
+      setThisYear(json.recordset)
+    });
+  },[])
+
+   const data = {
+    labels : lastYear.map((x)=>x.month),
+    datasets: [
+      {
+        label: '2022',
+        data: lastYear.map((x) => x.count),
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+      },
+      {
+        label: '2023',
+        data: thisYear.map((x:any) => x.num_records),
+        backgroundColor: 'rgba(53, 162, 235, 1)',
+      },
+    ],
+  };
   return <Bar options={options} data={data} />;
 }

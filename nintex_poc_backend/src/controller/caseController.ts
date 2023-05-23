@@ -31,4 +31,31 @@ export class CaseController {
             return res.status(500).json({msg: err})
         }
     }
+
+    getNumberOfCaseStatus = async (req: Request, res: Response) => {
+        try{
+            return res.json(await this.caseService.getNumberOfCaseStatus())
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
+
+    getCaseMonth = async (req: Request, res: Response) => {
+        try{
+            return res.json(await this.caseService.getCaseMonth())
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
+
+    getDistrict = async (req: Request, res: Response) => {
+        try{
+            return res.json(await this.caseService.getDistrict())
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
 } 

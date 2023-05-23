@@ -48,7 +48,7 @@ export function StatsRing({ data }: StatsRingProps) {
   });
 
   return (
-    <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+    <SimpleGrid cols={5} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
       {stats}
     </SimpleGrid>
   );

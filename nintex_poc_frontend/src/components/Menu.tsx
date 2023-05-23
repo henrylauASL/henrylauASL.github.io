@@ -64,7 +64,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const data = [
-  { url: '/', label: 'My Case', icon: IconBriefcase },
+  // { url: '/', label: 'My Case', icon: IconBriefcase },
   { url: '/dashboard', label: 'Dashboard', icon: IconChartBar },
   { url: '/case_management', label: 'Case Management', icon: IconFiles },
 ];
