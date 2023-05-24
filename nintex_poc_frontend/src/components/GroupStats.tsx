@@ -1,5 +1,5 @@
 import { RingProgress, Text, SimpleGrid, Paper, Center, Group } from '@mantine/core';
-import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons-react';
+import { IconArrowUpRight, IconArrowDownRight, IconFileDescription } from '@tabler/icons-react';
 
 export interface StatsRingProps {
   data: {
@@ -7,13 +7,14 @@ export interface StatsRingProps {
     stats: string;
     progress: number;
     color: string;
-    icon: 'up' | 'down';
+    icon: 'up' | 'down' | 'file';
   }[];
 }
 
 const icons = {
   up: IconArrowUpRight,
   down: IconArrowDownRight,
+  file: IconFileDescription
 };
 
 export function StatsRing({ data }: StatsRingProps) {

@@ -10,6 +10,8 @@ import {
   TextInput,
   rem,
   Button,
+  Anchor,
+  Badge,
 } from '@mantine/core';
 import { keys } from '@mantine/utils';
 import { IconSelector, IconChevronDown, IconChevronUp, IconSearch } from '@tabler/icons-react';
@@ -41,6 +43,9 @@ export interface RowData {
   caseTitle: string;
   caseDescription: string;
   caseProgress: string;
+  // dateOfReceipt: string;
+  substantiveReply: string;
+  PIC: string;
 }
 
 export interface TableSortProps {
@@ -125,14 +130,38 @@ export function TableSort({ data }: TableSortProps) {
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
+  function getColorByText(text:string) {
+    switch (text) {
+      case "Completed":
+        return "blue";
+      case "In progress":
+        return "grape";
+      case "New":
+        return "red";
+      case "Suspended":
+        return "orange";
+      default:
+        return "grey";
+    }
+  }
+
+  const url = 'https://aslbdemo.workflowcloud.com/forms/cb6c3885-2f11-448c-9acf-383898d1bf4b'
   const rows = sortedData.map((row) => (
     <tr key={row.caseID}>
       {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
-      <td style={{display: 'flex', justifyContent: 'center'}}><Button onClick={()=>console.log(row.GUID)}>Edit</Button></td>
-      <td>{row.caseID}</td>
+      {/* <td style={{display: 'flex', justifyContent: 'center'}}><Button onClick={()=>console.log(row.GUID)}>Edit</Button></td> */}
+      <td>
+        <Anchor component="button" type="button" onClick={()=>{window.open(`${url}?caseID=${row.caseID}`, '_blank', 'noopener,noreferrer');}}>
+          {row.caseID}
+        </Anchor>
+      </td>
       <td>{row.caseTitle}</td>
       <td>{row.caseDescription}</td>
-      <td>{row.caseProgress}</td>
+      <td>
+        <Badge color={getColorByText(row.caseProgress)} variant="light">{row.caseProgress}</Badge>
+      </td>
+      <td>{row.substantiveReply.substring(0, 10)}</td>
+      <td>{row.PIC}</td>
     </tr>
   ));
 
@@ -148,12 +177,12 @@ export function TableSort({ data }: TableSortProps) {
       <Table withBorder horizontalSpacing="xs" verticalSpacing="xs" miw={700} sx={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-          <Th
+          {/* <Th
               sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('caseID')}
             >
-            </Th>
+            </Th> */}
           <Th
               sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
@@ -181,6 +210,27 @@ export function TableSort({ data }: TableSortProps) {
               onSort={() => setSorting('caseProgress')}
             >
               Case Status
+            </Th>
+            {/* <Th
+              sorted={sortBy === 'dateOfReceipt'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('dateOfReceipt')}
+            >
+              Receipt Date
+            </Th> */}
+            <Th
+              sorted={sortBy === 'substantiveReply'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('substantiveReply')}
+            >
+              Substantive Reply Date
+            </Th>
+            <Th
+              sorted={sortBy === 'PIC'}
+              reversed={reverseSortDirection}
+              onSort={() => setSorting('PIC')}
+            >
+              PIC
             </Th>
           </tr>
         </thead>

@@ -44,7 +44,7 @@ export class CaseService {
     async getCase() {
       let pool = await connectToDatabase();
       try {
-          return await pool.request().query(`select GUID, caseID, caseTitle, caseDescription, caseProgress from caseDetails`)
+          return await pool.request().query(`select GUID, caseID, caseTitle, caseDescription, caseProgress, dateOfReceipt, substantiveReply, PIC from caseDetails`)
       }catch (err) {
             console.error('Error (getCase)', err);
           } finally {

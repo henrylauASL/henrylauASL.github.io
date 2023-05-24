@@ -6,7 +6,8 @@ import {
   IconFiles,
   IconLogout,
 } from '@tabler/icons-react';
-import { Link } from 'react-router-dom';
+import { Link, useHref } from 'react-router-dom';
+import { routes } from '../AppRoute';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -65,45 +66,35 @@ const useStyles = createStyles((theme) => ({
 
 const data = [
   // { url: '/', label: 'My Case', icon: IconBriefcase },
-  { url: '/dashboard', label: 'Dashboard', icon: IconChartBar },
+  { url: '/', label: 'Dashboard', icon: IconChartBar },
   { url: '/case_management', label: 'Case Management', icon: IconFiles },
 ];
 
 export function Menu() {
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('My Case');
+  const [active, setActive] = useState('Dashboard');
 
-  const links = data.map((item) => (
-    // <Link
-    //   className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-    //   to={item.url}
-    //   key={item.label}
-    //   onClick={(event) => {
-    //     // event.preventDefault();
-    //     setActive(item.label);
-    //   }}
-    // >
-    //   <item.icon className={classes.linkIcon} stroke={1.5} />
-    //   <span>{item.label}</span>
-    // </Link>
-        <a
-        className={cx(classes.link, /*{ [classes.linkActive]: item.label === active }*/)}
-        href={item.url}
-        key={item.label}
-        onClick={(event) => {
-          // event.preventDefault();
-          // setActive(item.label);
-        }}
-      >
-        <item.icon className={classes.linkIcon} stroke={1.5} />
-        <span>{item.label}</span>
-      </a>
-  ));
+  // const links = data.map((item) => (
+  //       <a
+  //       className={cx(classes.link, { [classes.linkActive]: item.label === active })}
+  //       href={item.url}
+  //       key={item.label}
+  //       onClick={(event) => {
+  //         event.preventDefault();
+  //         setActive(item.label);
+  //       }}
+  //     >
+  //       <item.icon className={classes.linkIcon} stroke={1.5} />
+  //       <span>{item.label}</span>
+  //     </a>
+  // ));
 
   return (
     <Navbar height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
-        {links}
+        <Link className={cx(classes.link)} to={useHref(routes.dashboard)}><IconChartBar className={classes.linkIcon} stroke={1.5} />Dashboard</Link>
+        <Link className={cx(classes.link)} to={useHref(routes.caseManagement)}><IconFiles className={classes.linkIcon} stroke={1.5} />Case Management</Link>
+        {/* {links} */}
         <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>

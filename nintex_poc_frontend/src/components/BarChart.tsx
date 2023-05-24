@@ -27,7 +27,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Number of case',
+      text: '',
     },
   },
 };
@@ -74,5 +74,10 @@ export function BarChart() {
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+  return <>
+          <h3 style = {{textAlign : 'center'}}>
+            Number of case
+          </h3>
+          <Bar options={options} data={data} />
+        </>
 }

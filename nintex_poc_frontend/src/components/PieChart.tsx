@@ -28,33 +28,38 @@ export const data = {
 
 export function PieChart() {
   const [thisYear, setThisYear] = useState<any>(data);
-  useEffect(()=>{
-    fetch(`http://localhost:8000/getDistrict `)
-    .then((res)=>res.json())
-    .catch((err)=>({error: String(err)}))
-    .then((json)=> {
-      console.log("getDistrict", json.recordset)
-      setThisYear({
-        labels: ['HKG', 'KLN', 'NT'],
-        datasets: [
-          {
-            label: '# of Votes',
-            data: [+json.recordset[0].districtCount, +json.recordset[1].districtCount, +json.recordset[2].districtCount],
-            backgroundColor: [
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)'
-            ],
-            borderColor: [
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)'
-            ],
-            borderWidth: 1,
-          },
-        ],
-      })
-    });
-  },[])
-  return <Pie data={thisYear} />;
+  useEffect(() => {
+    fetch(`http://localhost:8000/getDistrict`)
+      .then((res) => res.json())
+      .catch((err) => ({ error: String(err) }))
+      .then((json) => {
+        console.log("getDistrict", json.recordset)
+        setThisYear({
+          labels: ['HKG', 'KLN', 'NT'],
+          datasets: [
+            {
+              label: '# of Votes',
+              data: [+json.recordset[0].districtCount, +json.recordset[1].districtCount, +json.recordset[2].districtCount],
+              backgroundColor: [
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)'
+              ],
+              borderColor: [
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)'
+              ],
+              borderWidth: 1,
+            },
+          ],
+        })
+      });
+  }, [])
+  return <>
+            <h3 style = {{textAlign : 'center'}}>
+              District
+            </h3>
+            <Pie data={thisYear} />
+          </>
 }

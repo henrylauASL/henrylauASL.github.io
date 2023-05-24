@@ -10,7 +10,7 @@ const data : StatsRingProps['data'] = [
         "stats": "0",
         "progress": 0,
         "color": "teal",
-        "icon": "up"
+        "icon": "file"
       },
       {
         "label": "Completed",
@@ -20,11 +20,11 @@ const data : StatsRingProps['data'] = [
         "icon": "up"
       },
       {
-        "label": "In Progress",
+        "label": "InProgress",
         "stats": "0",
         "progress": 0,
         "color": "grape",
-        "icon": "down"
+        "icon": "up"
       },
       {
         "label": "New",
@@ -52,18 +52,18 @@ export default function Dashboard() {
       .catch((err)=>({error: String(err)}))
       .then((json)=> { 
       // console.log('CaseCount', json.recordset);
-      const comCount = json.recordset[0].progressCount
-      const inCount = json.recordset[1].progressCount
-      const newCount = json.recordset[2].progressCount
-      const susCount = json.recordset[3].progressCount
-      const totalCount = comCount + inCount + newCount + susCount
+      let comCount = +json.recordset[0].progressCount
+      let inCount = +json.recordset[1].progressCount
+      let newCount = +json.recordset[2].progressCount
+      let susCount = +json.recordset[3].progressCount
+      let totalCount = comCount + inCount + newCount + susCount
       setCaseCount([
         {
           "label": "Total number of case",
           "stats": `${totalCount}`,
           "progress": 100,
           "color": "teal",
-          "icon": "up"
+          "icon": "file"
         },
         {
           "label": "Completed",
@@ -77,7 +77,7 @@ export default function Dashboard() {
           "stats": `${inCount}`,
           "progress": inCount/totalCount*100,
           "color": "grape",
-          "icon": "down"
+          "icon": "up"
         },
         {
           "label": "New",
