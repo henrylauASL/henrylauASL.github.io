@@ -145,7 +145,7 @@ export function TableSort({ data }: TableSortProps) {
     }
   }
 
-  const url = 'https://aslbdemo.workflowcloud.com/forms/cb6c3885-2f11-448c-9acf-383898d1bf4b'
+  const url = 'https://aslbdemo.workflowcloud.com/forms/9704b106-7517-4881-b154-daca88c913e2'
   const rows = sortedData.map((row) => (
     <tr key={row.caseID}>
       {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
@@ -239,11 +239,12 @@ export function TableSort({ data }: TableSortProps) {
             rows
           ) : (
             <tr>
-              <td colSpan={Object.keys(data[0]).length}>
-                <Text weight={500} align="center">
+              {/* <td colSpan={Object.keys(data[0]).length}>
+                
+              </td> */}
+              <Text weight={500} align="center" >
                   Nothing found
                 </Text>
-              </td>
             </tr>
           )}
         </tbody>
