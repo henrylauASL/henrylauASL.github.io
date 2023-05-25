@@ -120,17 +120,17 @@ export function TableSort({ data }: TableSortProps) {
     setSortedData(sortData(data, { sortBy: field, reversed, search }));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setSortedData(data);
-  },[data])
-  
+  }, [data])
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setSearch(value);
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
-  function getColorByText(text:string) {
+  function getColorByText(text: string) {
     switch (text) {
       case "Completed":
         return "blue";
@@ -151,7 +151,7 @@ export function TableSort({ data }: TableSortProps) {
       {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
       {/* <td style={{display: 'flex', justifyContent: 'center'}}><Button onClick={()=>console.log(row.GUID)}>Edit</Button></td> */}
       <td>
-        <Anchor component="button" type="button" onClick={()=>{window.open(`${url}?caseID=${row.caseID}`, '_blank', 'noopener,noreferrer');}}>
+        <Anchor component="button" type="button" onClick={() => { window.open(`${url}?caseID=${row.caseID}`, '_blank', 'noopener,noreferrer'); }}>
           {row.caseID}
         </Anchor>
       </td>
@@ -177,13 +177,13 @@ export function TableSort({ data }: TableSortProps) {
       <Table withBorder horizontalSpacing="xs" verticalSpacing="xs" miw={700} sx={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-          {/* <Th
+            {/* <Th
               sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('caseID')}
             >
             </Th> */}
-          <Th
+            <Th
               sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
               onSort={() => setSorting('caseID')}
@@ -211,13 +211,6 @@ export function TableSort({ data }: TableSortProps) {
             >
               Case Status
             </Th>
-            {/* <Th
-              sorted={sortBy === 'dateOfReceipt'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('dateOfReceipt')}
-            >
-              Receipt Date
-            </Th> */}
             <Th
               sorted={sortBy === 'substantiveReply'}
               reversed={reverseSortDirection}
@@ -239,12 +232,9 @@ export function TableSort({ data }: TableSortProps) {
             rows
           ) : (
             <tr>
-              {/* <td colSpan={Object.keys(data[0]).length}>
-                
-              </td> */}
-              <Text weight={500} align="center" >
-                  Nothing found
-                </Text>
+              <Text weight={500} style={{ textAlign: "center" }}>
+                Nothing found
+              </Text>
             </tr>
           )}
         </tbody>
