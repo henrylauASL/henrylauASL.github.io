@@ -29,9 +29,9 @@ export class CaseService {
     async createCase(caseType : caseType) {
         var pool = await connectToDatabase();
         try {
-          let sql = `insert into caseDetails (GUID, caseTitle, caseDescription, natureOfComplaint, moreOptions, remarks, caseProgress, dateOfReceipt, substantiveReply, gender, complainant, HKID, passport, idOrPassport, country, phone, email, address, district, createdBy, lastModifiedBy) values 
+          let sql = `insert into caseDetails (GUID, caseTitle, caseDescription, natureOfComplaint, moreOptions, remarks, caseProgress, dateOfReceipt, substantiveReply, gender, complainant, HKID, passport, idOrPassport, country, phone, email, address, district, createdBy, lastModifiedBy, PIC) values 
           ('${caseType.GUID}', N'${caseType.caseTitle}', N'${caseType.caseDescription}', '${caseType.natureOfComplaint}', '${caseType.moreOptions}'
-          , N'${caseType.remarks}', '${caseType.caseProgress}', '${caseType.dateOfReceipt}','${caseType.substantiveReply}','${caseType.gender}', N'${caseType.complainant}','${caseType.HKID}','${caseType.passport}','${caseType.idOrPassport}', '${caseType.country}', '${caseType.phone}','${caseType.email}', N'${caseType.address}', '${caseType.district}', '${caseType.createBy}', '${caseType.lastModifiedBy}')`
+          , N'${caseType.remarks}', '${caseType.caseProgress}', '${caseType.dateOfReceipt}','${caseType.substantiveReply}','${caseType.gender}', N'${caseType.complainant}','${caseType.HKID}','${caseType.passport}','${caseType.idOrPassport}', '${caseType.country}', '${caseType.phone}','${caseType.email}', N'${caseType.address}', '${caseType.district}', '${caseType.createBy}', '${caseType.lastModifiedBy}', 'Pending')`
           console.log(sql)
             return await pool.request().query(sql);
           } catch (err) {

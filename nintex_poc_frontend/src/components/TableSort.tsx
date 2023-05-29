@@ -177,12 +177,6 @@ export function TableSort({ data }: TableSortProps) {
       <Table withBorder horizontalSpacing="xs" verticalSpacing="xs" miw={700} sx={{ tableLayout: 'fixed' }}>
         <thead>
           <tr>
-            {/* <Th
-              sorted={sortBy === 'caseID'}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting('caseID')}
-            >
-            </Th> */}
             <Th
               sorted={sortBy === 'caseID'}
               reversed={reverseSortDirection}
@@ -238,7 +232,7 @@ export function TableSort({ data }: TableSortProps) {
             </tr>
           )}
         </tbody>
-      </Table>
+      </Table>        
     </ScrollArea>
   );
 }
