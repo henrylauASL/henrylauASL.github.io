@@ -3,21 +3,20 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import CaseManagement from "./pages/CaseManagement";
-import MyCase from "./pages/MyCase";
 import Login from "./pages/Login";
 
 export const routes = {
-    dashboard: '/',
+    login: '/login',
+    dashboard: '/dashboard',
     caseManagement: '/case_management'
 }
 
 export function AppRoutes() {
     return (
         <Routes>
-            {/* <Route path="/" element={<MyCase />}></Route> */}
+            <Route path={routes.login} element={<Login />}></Route>
             <Route path={routes.dashboard} element={<Dashboard />}></Route>
             <Route path={routes.caseManagement} element={<CaseManagement />}></Route>
-            <Route path="/login" element={<Login />}></Route>
         </Routes>
     );
 }

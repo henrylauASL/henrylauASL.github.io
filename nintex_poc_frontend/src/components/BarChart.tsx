@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { api_origin } from '../Api';
 
 ChartJS.register(
   CategoryScale,
@@ -50,7 +51,7 @@ const lastYear = [
 export function BarChart() {
   const [thisYear, setThisYear] = useState<any>([]);
   useEffect(()=>{
-    fetch(`http://localhost:8000/getCaseMonth `)
+    fetch(`${api_origin}/getCaseMonth `)
     .then((res)=>res.json())
     .catch((err)=>({error: String(err)}))
     .then((json)=> {

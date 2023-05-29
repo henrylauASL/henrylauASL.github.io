@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
+import { api_origin } from '../Api';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,7 +30,7 @@ export const data = {
 export function PieChart() {
   const [thisYear, setThisYear] = useState<any>(data);
   useEffect(() => {
-    fetch(`http://localhost:8000/getDistrict`)
+    fetch(`${api_origin}/getDistrict`)
       .then((res) => res.json())
       .catch((err) => ({ error: String(err) }))
       .then((json) => {

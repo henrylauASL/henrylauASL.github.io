@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RowData, TableSort, TableSortProps } from "../components/TableSort";
 import { Button } from "@mantine/core";
 import * as XLSX from 'xlsx';
+import { api_origin } from "../Api";
 
 
 
@@ -21,7 +22,7 @@ const data: TableSortProps['data'] = [
 export default function CaseManagement() {
     const [caseDetails, setCaseDetails] = useState<TableSortProps['data']>(data);
     useEffect(()=>{
-        fetch(`http://localhost:8000/getCase`)
+        fetch(`${api_origin}/getCase`)
         .then((res)=>res.json())
         .catch((err)=>({error: String(err)}))
         .then((json)=> {

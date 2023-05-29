@@ -1,0 +1,1 @@
+export let api_origin = 'http://192.168.105.18:8000'

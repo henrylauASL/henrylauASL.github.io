@@ -3,6 +3,7 @@ import { PieChart } from "../components/PieChart";
 import { BarChart } from "../components/BarChart";
 import { Grid } from "@mantine/core";
 import { StatsRing, StatsRingProps } from "../components/GroupStats";
+import { api_origin } from "../Api";
 
 const data : StatsRingProps['data'] = [
       {
@@ -47,7 +48,7 @@ const data : StatsRingProps['data'] = [
 export default function Dashboard() {
   const [caseCount, setCaseCount] = useState<StatsRingProps['data']>(data);
   useEffect(()=>{
-      fetch(`http://localhost:8000/getNumberOfCaseStatus`)
+      fetch(`${api_origin}/getNumberOfCaseStatus`)
       .then((res)=>res.json())
       .catch((err)=>({error: String(err)}))
       .then((json)=> { 
