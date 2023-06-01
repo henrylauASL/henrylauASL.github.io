@@ -3,6 +3,8 @@ import { RowData, TableSort, TableSortProps } from "../components/TableSort";
 import { Button, NativeSelect } from "@mantine/core";
 import * as XLSX from 'xlsx';
 import { api_origin } from "../Api";
+import { DatePickerInput } from '@mantine/dates';
+import { IconCalendar } from '@tabler/icons-react';
 
 
 const currentDate = new Date();
@@ -17,7 +19,7 @@ const dateTimeString = `${year}-${month}-${day} ${hours}${minutes}${seconds}`;
 
 const data: TableSortProps['data'] = [
     { GUID: '', 
-    caseID: '', 
+    caseID : '', 
     caseTitle: '', 
     caseDescription: '', 
     caseProgress: '', 
@@ -29,6 +31,7 @@ const data: TableSortProps['data'] = [
 
 export default function CaseManagement() {
     const [caseDetails, setCaseDetails] = useState<TableSortProps['data']>(data);
+    const [value, setValue] = useState<[Date | null, Date | null]>([null, null]);
     useEffect(()=>{
         fetch(`${api_origin}/getCase`)
         .then((res)=>res.json())
@@ -38,9 +41,18 @@ export default function CaseManagement() {
         });
     },[])
 
-    const exportExcel = () => {
-        const worksheet = XLSX.utils.json_to_sheet(caseDetails);
+    let dataSet = caseDetails.map((x)=>({
+        'Case ID' : x.caseID,
+        'Case Description' : x.caseDescription,
+        'Case Progress' : x.caseProgress,
+        'Substantive Reply Date' : x.substantiveReply.slice(0, 10),
+        'PIC' : x.PIC,
+    }))
+
+
+     const exportExcel = () => {
         const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(dataSet);
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
         XLSX.writeFile(workbook, `Case List ${dateTimeString}.xlsx`);
     }
@@ -48,6 +60,23 @@ export default function CaseManagement() {
     return (
         <div>
             <h2>Case Management</h2>
+            <div style={{display:'flex'}}>
+            {/* <NativeSelect
+                style = {{marginBottom : '5px',  marginRight : '5px'}} 
+                data={['Please Select', 'Completed', 'In progress', 'New', 'Suspended']}
+                label="Case Status"
+                maw={200}
+            />
+            <DatePickerInput
+                style = {{marginBottom : '5px',  marginRight : '5px'}}
+                type="range"
+                label="Pick dates range"
+                placeholder="Pick dates range"
+                value={value}
+                onChange={setValue}
+                maw={400}
+            /> */}
+            </div>
             <Button 
                 color="teal" 
                 style = {{marginBottom : '5px'}} 
@@ -66,3 +95,4 @@ export default function CaseManagement() {
         </div>
     );
 }
+

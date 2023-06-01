@@ -43,7 +43,6 @@ export interface RowData {
   caseTitle: string;
   caseDescription: string;
   caseProgress: string;
-  // dateOfReceipt: string;
   substantiveReply: string;
   PIC: string;
 }
@@ -107,6 +106,21 @@ function sortData(
   );
 }
 
+export function getColorByText(text: string) {
+  switch (text) {
+    case "In progress":
+      return "grape";
+    case "New":
+      return "red";
+    case "Suspended":
+      return "orange";
+    case "Completed":
+      return "blue";
+    default:
+      return "gray";
+  }
+}
+
 export function TableSort({ data }: TableSortProps) {
   const [search, setSearch] = useState('');
   const [sortedData, setSortedData] = useState(data);
@@ -130,26 +144,9 @@ export function TableSort({ data }: TableSortProps) {
     setSortedData(sortData(data, { sortBy, reversed: reverseSortDirection, search: value }));
   };
 
-  function getColorByText(text: string) {
-    switch (text) {
-      case "Completed":
-        return "blue";
-      case "In progress":
-        return "grape";
-      case "New":
-        return "red";
-      case "Suspended":
-        return "orange";
-      default:
-        return "grey";
-    }
-  }
-
   const url = 'https://aslbdemo.workflowcloud.com/forms/9704b106-7517-4881-b154-daca88c913e2'
   const rows = sortedData.map((row) => (
     <tr key={row.caseID}>
-      {/* <div style={{display: 'flex', justifyContent: 'center'}}><td><Button color="pink">View</Button></td><td><Button>Edit</Button></td></div> */}
-      {/* <td style={{display: 'flex', justifyContent: 'center'}}><Button onClick={()=>console.log(row.GUID)}>Edit</Button></td> */}
       <td>
         <Anchor component="button" type="button" onClick={() => { window.open(`${url}?caseID=${row.caseID}`, '_blank', 'noopener,noreferrer'); }}>
           {row.caseID}
@@ -160,13 +157,13 @@ export function TableSort({ data }: TableSortProps) {
       <td>
         <Badge color={getColorByText(row.caseProgress)} variant="light">{row.caseProgress}</Badge>
       </td>
-      <td>{row.substantiveReply.substring(0, 10)}</td>
+      <td>{row.substantiveReply.slice(0, 10)}</td>
       <td>{row.PIC}</td>
     </tr>
   ));
 
   return (
-    <ScrollArea>
+    <>
       <TextInput
         placeholder="Search by any field"
         mb="md"
@@ -233,6 +230,6 @@ export function TableSort({ data }: TableSortProps) {
           )}
         </tbody>
       </Table>        
-    </ScrollArea>
+    </>
   );
 }

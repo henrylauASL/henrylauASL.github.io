@@ -74,27 +74,12 @@ export function Menu() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Dashboard');
 
-  // const links = data.map((item) => (
-  //       <a
-  //       className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-  //       href={item.url}
-  //       key={item.label}
-  //       onClick={(event) => {
-  //         event.preventDefault();
-  //         setActive(item.label);
-  //       }}
-  //     >
-  //       <item.icon className={classes.linkIcon} stroke={1.5} />
-  //       <span>{item.label}</span>
-  //     </a>
-  // ));
-
   return (
     <Navbar height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
+        <Link className={cx(classes.link)} to={useHref(routes.myCase)}><IconBriefcase className={classes.linkIcon} stroke={1.5} />My Case</Link>
         <Link className={cx(classes.link)} to={useHref(routes.dashboard)}><IconChartBar className={classes.linkIcon} stroke={1.5} />Dashboard</Link>
         <Link className={cx(classes.link)} to={useHref(routes.caseManagement)}><IconFiles className={classes.linkIcon} stroke={1.5} />Case Management</Link>
-        {/* {links} */}
         <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>

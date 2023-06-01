@@ -58,4 +58,13 @@ export class CaseController {
             return res.status(500).json({msg: err})
         }
     }
+
+    insertDummyCase = async (req: Request, res: Response) => {
+        try{
+            return res.json(await this.caseService.insertDummyCase())
+        }
+        catch (err){
+            return res.status(500).json({msg: err})
+        }
+    }
 } 
