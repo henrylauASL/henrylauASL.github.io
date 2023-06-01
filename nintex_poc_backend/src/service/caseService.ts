@@ -1,43 +1,89 @@
-import { connectToDatabase } from '../../src/server';
+import { connectToDatabase } from "../../src/server";
+import * as sql from 'mssql';
 
 type caseType = {
-  GUID: string,
-  caseTitle: string,
-  caseDescription: string,
-  natureOfComplaint: string,
-  moreOptions: string,
-  remarks: string,
-  caseProgress: string,
-  dateOfReceipt: string,
+  GUID: string;
+  caseTitle: string;
+  caseDescription: string;
+  natureOfComplaint: string;
+  moreOptions: string;
+  remarks: string;
+  caseProgress: string;
+  dateOfReceipt: string;
   // dateOfAcknowledgement: string,
-  substantiveReply: string,
-  gender: string,
-  complainant: string,
-  HKID: string,
-  passport: string,
-  idOrPassport: string,
-  country: string,
-  phone: string,
-  email: string,
-  address: string,
-  district: string,
-  createBy: string,
-  lastModifiedBy: string
-}
+  substantiveReply: string;
+  gender: string;
+  complainant: string;
+  HKID: string;
+  passport: string;
+  idOrPassport: string;
+  country: string;
+  phone: string;
+  email: string;
+  address: string;
+  district: string;
+  createdBy: string;
+  lastModifiedBy: string;
+};
 
 export class CaseService {
   async createCase(caseType: caseType) {
     var pool = await connectToDatabase();
+    const request = pool.request();
+    const {
+      GUID,
+      caseTitle,
+      caseDescription,
+      natureOfComplaint,
+      moreOptions,
+      remarks,
+      caseProgress,
+      dateOfReceipt,
+      substantiveReply,
+      gender,
+      complainant,
+      HKID,
+      passport,
+      idOrPassport,
+      country,
+      phone,
+      email,
+      address,
+      district,
+      createdBy,
+      lastModifiedBy,
+    } = caseType;
+
     try {
-      let sql = `insert into caseDetails (GUID, caseTitle, caseDescription, natureOfComplaint, moreOptions, remarks, caseProgress, dateOfReceipt, substantiveReply, gender, complainant, HKID, passport, idOrPassport, country, phone, email, address, district, createdBy, lastModifiedBy, PIC) values 
-          ('${caseType.GUID}', N'${caseType.caseTitle}', N'${caseType.caseDescription}', '${caseType.natureOfComplaint}', '${caseType.moreOptions}'
-          , N'${caseType.remarks}', '${caseType.caseProgress}', '${caseType.dateOfReceipt}','${caseType.substantiveReply}','${caseType.gender}', N'${caseType.complainant}','${caseType.HKID}','${caseType.passport}','${caseType.idOrPassport}', '${caseType.country}', '${caseType.phone}','${caseType.email}', N'${caseType.address}', '${caseType.district}', '${caseType.createBy}', '${caseType.lastModifiedBy}', 'Pending')`
-      console.log('sql', sql)
-      let res = await pool.request().query(sql)
-      console.log("res", res);
+      let query = `insert into caseDetails (GUID, caseTitle, caseDescription, natureOfComplaint, moreOptions, remarks, caseProgress, dateOfReceipt, substantiveReply, gender, complainant, HKID, passport, idOrPassport, country, phone, email, address, district, createdBy, lastModifiedBy, PIC) values 
+          (@GUID, @caseTitle, @caseDescription, @natureOfComplaint, @moreOptions, @remarks, @caseProgress, @dateOfReceipt,@substantiveReply
+            ,@gender, @complainant,@HKID,@passport,@idOrPassport, @country, @phone,@email, @address, @district, @createdBy, @lastModifiedBy, 'Pending')`;
+          console.log("User added:", query);
+          request.input('GUID', sql.NVarChar, GUID);
+          request.input('caseTitle', sql.NVarChar, caseTitle);
+          request.input('caseDescription', sql.NVarChar, caseDescription);
+          request.input('natureOfComplaint', sql.NVarChar, natureOfComplaint);
+          request.input('moreOptions', sql.NVarChar, moreOptions);
+          request.input('remarks', sql.NVarChar, remarks);
+          request.input('caseProgress', sql.NVarChar, caseProgress);
+          request.input('dateOfReceipt', sql.NVarChar, dateOfReceipt);
+          request.input('substantiveReply', sql.NVarChar, substantiveReply);
+          request.input('gender', sql.NVarChar, gender);
+          request.input('complainant', sql.NVarChar, complainant);
+          request.input('HKID', sql.NVarChar, HKID);
+          request.input('passport', sql.NVarChar, passport);
+          request.input('idOrPassport', sql.NVarChar, idOrPassport);
+          request.input('country', sql.NVarChar, country);
+          request.input('phone', sql.NVarChar, phone);
+          request.input('email', sql.NVarChar, email);
+          request.input('address', sql.NVarChar, address);
+          request.input('district', sql.NVarChar, district);
+          request.input('createdBy', sql.NVarChar, createdBy);
+          request.input('lastModifiedBy', sql.NVarChar,lastModifiedBy);
+      let res = await request.query(query);
       return res;
     } catch (err) {
-      console.error('Error (createCase)', err);
+      console.error("Error (createCase)", err);
     } finally {
       pool.close();
     }
@@ -46,9 +92,13 @@ export class CaseService {
   async getCase() {
     let pool = await connectToDatabase();
     try {
-      return await pool.request().query(`select GUID, caseID, caseTitle, caseDescription, caseProgress, substantiveReply, PIC from caseDetails`)
+      return await pool
+        .request()
+        .query(
+          `select GUID, caseID, caseTitle, caseDescription, caseProgress, substantiveReply, PIC from caseDetails`
+        );
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }
@@ -57,9 +107,11 @@ export class CaseService {
   async getCasebyID(id: number | string) {
     let pool = await connectToDatabase();
     try {
-      return await pool.request().query(`select * from caseDetails where id = ${id}`)
+      return await pool
+        .request()
+        .query(`select * from caseDetails where id = ${id}`);
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }
@@ -83,10 +135,10 @@ export class CaseService {
             WHEN 'New' THEN 3
             WHEN 'Suspended' THEN 4
             ELSE 5
-          END`
-      return await pool.request().query(sql)
+          END`;
+      return await pool.request().query(sql);
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }
@@ -107,10 +159,10 @@ export class CaseService {
           MONTH(dateOfReceipt)
         ORDER BY
           YEAR(dateOfReceipt),
-          MONTH(dateOfReceipt)`
-      return await pool.request().query(sql)
+          MONTH(dateOfReceipt)`;
+      return await pool.request().query(sql);
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }
@@ -119,10 +171,10 @@ export class CaseService {
   async getDistrict() {
     let pool = await connectToDatabase();
     try {
-      let sql = `SELECT district, COUNT (district) as districtCount  FROM caseDetails GROUP BY district`
-      return await pool.request().query(sql)
+      let sql = `SELECT district, COUNT (district) as districtCount  FROM caseDetails GROUP BY district`;
+      return await pool.request().query(sql);
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }
@@ -135,12 +187,14 @@ export class CaseService {
       // Next time start at 1001
       for (let i = 101; i <= 1000; i++) {
         const caseTitle = `Dummy Case ${i}`;
-        const result = await pool.query(`INSERT INTO caseDetails (caseTitle, caseDescription, substantiveReply, caseProgress, PIC) VALUES ('${caseTitle}', 'Dummy Case', '2023-05-30', 'other', 'Dummy')`);
+        const result = await pool.query(
+          `INSERT INTO caseDetails (caseTitle, caseDescription, substantiveReply, caseProgress, PIC) VALUES ('${caseTitle}', 'Dummy Case', '2023-05-30', 'other', 'Dummy')`
+        );
         console.log(`Inserted case ${i}: ${result.rowsAffected} row(s)`);
-    }
-    return 200
+      }
+      return 200;
     } catch (err) {
-      console.error('Error (getCase)', err);
+      console.error("Error (getCase)", err);
     } finally {
       pool.close();
     }

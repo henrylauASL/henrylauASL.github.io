@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserService } from "../services/LoginService";
 import {IUser} from '../models/IUser';
+import UserContext from "../components/UserContext";
 
 export function Login() {
     const userService = new UserService();
-
-    const [user,setUser] = useState<IUser>();
+    const { user, setUser} = useContext(UserContext);
 
     useEffect(()=>{
     

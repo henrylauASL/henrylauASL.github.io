@@ -1,5 +1,6 @@
 import * as msal from '@azure/msal-browser';
 import { IUser } from '../models/IUser';
+import UserContext from '../components/UserContext';
 
 const clientConfig: msal.Configuration = {
     auth: {
@@ -20,14 +21,15 @@ export class UserService {
         await this.pca.handleRedirectPromise();
         
         let accounts = await this.pca.getAllAccounts();
-
+        
         if(accounts.length===0){
             await this.pca.loginRedirect();
         }
-
+        
         return Promise.resolve({
             name: accounts[0]?.name!,
-            id: accounts[0]?.localAccountId!
+            id: accounts[0]?.localAccountId!,
+            email: accounts[0].username
         });
 
      }

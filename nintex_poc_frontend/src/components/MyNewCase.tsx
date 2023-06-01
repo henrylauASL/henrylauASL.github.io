@@ -1,8 +1,8 @@
 import { stringTypeAnnotation } from "@babel/types";
 import { List, ThemeIcon } from "@mantine/core";
 import { IconCircleDashed } from "@tabler/icons-react";
-import React, { useEffect, useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import UserContext from "./UserContext";
 interface taskInfo {
     name: string;
     url: string;
@@ -11,6 +11,7 @@ interface taskInfo {
 }
 
 export default function MyNewCase() {
+  const { user } = useContext(UserContext);
   const [task, setTask] = useState<taskInfo[]>([]);
   const getTask = "https://au.nintex.io/workflows/v2/tasks";
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function MyNewCase() {
         let newDataSet:taskInfo[] = [];
         json.tasks.forEach((task: any) => {
           task.taskAssignments.forEach((ta: any) => {
-            if (ta.assignee == "henrylau@asl.com.hk") {
+            if (ta.assignee == user.email) {
               newDataSet.push({ name: task.name, url: ta.urls.formUrl, createdDate: task.createdDate, status: task.status });
             }
           });

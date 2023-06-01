@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createStyles,
   Table,
@@ -8,6 +8,7 @@ import {
   Anchor,
   Paper,
 } from "@mantine/core";
+import UserContext from "./UserContext";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -45,6 +46,7 @@ interface taskInfo {
 }
 
 export default function MyWaitingCase() {
+  const { user } = useContext(UserContext);
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
   const [task, setTask] = useState<taskInfo[]>([]);
@@ -64,7 +66,7 @@ export default function MyWaitingCase() {
         let newDataSet: taskInfo[] = [];
         json.tasks.forEach((task: any) => {
           task.taskAssignments.forEach((ta: any) => {
-            if (ta.assignee == "henrylau@asl.com.hk") {
+            if (ta.assignee == user.email) {
               let msg = task.message;
               const regex = /\((.*?)\)/;
               const matches = msg.match(regex);

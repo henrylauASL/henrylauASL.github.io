@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createStyles,
   Table,
@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { api_origin } from "../Api";
 import { getColorByText } from "./TableSort";
+import UserContext from "./UserContext";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -49,6 +50,7 @@ interface caseDetails {
 }
 
 export default function MyExistCase() {
+  const { user } = useContext(UserContext);
   const { classes, cx } = useStyles();
   const [scrolled, setScrolled] = useState(false);
   const [caseDetails, setCaseDetails] = useState<caseDetails[]>([]);
@@ -60,10 +62,10 @@ export default function MyExistCase() {
         setCaseDetails(json.recordset);
       });
   }, []);
-
+  console.log(user.email)
   const url =
     "https://aslbdemo.workflowcloud.com/forms/9704b106-7517-4881-b154-daca88c913e2";
-  let myCase = caseDetails.filter((x: any) => (x.PIC == "henrylau@asl.com.hk" && x.caseProgress == "In progress"));
+  let myCase = caseDetails.filter((x: any) => (x.PIC == user.email && x.caseProgress == "In progress"));
   const rows = myCase.map((row) => (
     <tr key={row.GUID}>
       <td style={{ width: "10rem" }}>
