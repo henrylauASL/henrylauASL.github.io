@@ -6,7 +6,7 @@ const clientConfig: msal.Configuration = {
     auth: {
         clientId: "a525ce98-45fd-4e8c-99a3-1f39577924b3",
         authority: "https://login.microsoftonline.com/9970d0c1-ca9f-4f76-9db8-50ed9b1e0d4c",
-        redirectUri:"https://5d99-202-140-236-1.ngrok-free.app/Login"
+        redirectUri:"http://localhost:3000/Login"
     }
 };
 
