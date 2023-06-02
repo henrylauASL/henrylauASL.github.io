@@ -13,13 +13,5 @@ export default function MyCase() {
           <MyExistCase />
       </SimpleGrid>
     </div>
-    // <>
-    //   <div style={{ padding : "5px", boxShadow: "2px 2px 10px rgb(128, 128, 128)", marginBottom : "10px"}}>
-    //     <MyNewCase/>
-    //   </div>
-    //   <div style={{ boxShadow: "2px 2px 10px rgb(128, 128, 128)"}}>
-    //     <MyExistCase />
-    //   </div>
-    // </>
   );
 }
