@@ -16,6 +16,9 @@ import { SubPage } from './SubPage';
 export default function Main() {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  const handleCloseBurger = () => {
+    setOpened(false)
+  }
   return (
     <AppShell
       styles={{
@@ -28,7 +31,7 @@ export default function Main() {
       asideOffsetBreakpoint="sm"
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-          <Menu />
+          <Menu onClick={handleCloseBurger}/>
         </Navbar>
       }
       // footer={

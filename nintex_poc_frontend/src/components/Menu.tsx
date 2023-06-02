@@ -64,22 +64,22 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const data = [
-  // { url: '/', label: 'My Case', icon: IconBriefcase },
-  { url: '/', label: 'Dashboard', icon: IconChartBar },
-  { url: '/case_management', label: 'Case Management', icon: IconFiles },
-];
+// const data = [
+//   { url: '/', label: 'My Case', icon: IconBriefcase },
+//   { url: '/', label: 'Dashboard', icon: IconChartBar },
+//   { url: '/case_management', label: 'Case Management', icon: IconFiles },
+// ];
 
-export function Menu() {
+export function Menu(props:any) {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState('Dashboard');
 
   return (
     <Navbar height={700} width={{ sm: 300 }} p="md">
       <Navbar.Section grow>
-        <Link className={cx(classes.link)} to={useHref(routes.myCase)}><IconBriefcase className={classes.linkIcon} stroke={1.5} />My Case</Link>
-        <Link className={cx(classes.link)} to={useHref(routes.dashboard)}><IconChartBar className={classes.linkIcon} stroke={1.5} />Dashboard</Link>
-        <Link className={cx(classes.link)} to={useHref(routes.caseManagement)}><IconFiles className={classes.linkIcon} stroke={1.5} />Case Management</Link>
+        <Link onClick={props.onClick} className={cx(classes.link)} to={useHref(routes.myCase)}><IconBriefcase className={classes.linkIcon} stroke={1.5} />My Case</Link>
+        <Link onClick={props.onClick} className={cx(classes.link)} to={useHref(routes.dashboard)}><IconChartBar className={classes.linkIcon} stroke={1.5} />Dashboard</Link>
+        <Link onClick={props.onClick} className={cx(classes.link)} to={useHref(routes.caseManagement)}><IconFiles className={classes.linkIcon} stroke={1.5} />Case Management</Link>
         <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>
