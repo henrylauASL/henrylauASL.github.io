@@ -68,11 +68,9 @@ export default function MyWaitingCase() {
           task.taskAssignments.forEach((ta: any) => {
             if (ta.assignee == user.email) {
               let msg = task.message;
-              const regex = /\((.*?)\)/;
-              const matches = msg.match(regex);
-              const value = matches[1].trim();
-              const decoded = value.replace(/&nbsp;/g, " ");
-              const trimmedMSG = decoded.trim();
+              const regex = /\(([^)]+)\)/;
+              const match = regex.exec(msg);
+              const trimmedMSG = match ? match[1].replace(/&nbsp;/g, ' ').trim() : '';
               newDataSet.push({
                 name: task.name,
                 url: ta.urls.formUrl,
