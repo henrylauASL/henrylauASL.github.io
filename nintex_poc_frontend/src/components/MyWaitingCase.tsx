@@ -42,7 +42,7 @@ interface taskInfo {
   url: string;
   createdDate: string;
   status: string;
-  msg: string;
+  // msg: string;
 }
 
 export default function MyWaitingCase() {
@@ -67,16 +67,15 @@ export default function MyWaitingCase() {
         json.tasks.forEach((task: any) => {
           task.taskAssignments.forEach((ta: any) => {
             if (ta.assignee == user.email) {
-              let msg = task.message;
-              const regex = /\(([^)]+)\)/;
-              const match = regex.exec(msg);
-              const trimmedMSG = match ? match[1].replace(/&nbsp;/g, ' ').trim() : '';
+              // let msg = task.message;
+              // const regex = /\(([^)]+)\)/;
+              // const match = regex.exec(msg);
+              // const trimmedMSG = match ? match[1].replace(/&nbsp;/g, ' ').trim() : '';
               newDataSet.push({
                 name: task.name,
                 url: ta.urls.formUrl,
                 createdDate: task.createdDate,
                 status: task.status,
-                msg: trimmedMSG,
               });
             }
           });
@@ -97,7 +96,7 @@ export default function MyWaitingCase() {
           {row.name}
         </Anchor>
       </td>
-      <td style={{ width: "20rem" }}>{row.msg}</td>
+      {/* <td style={{ width: "20rem" }}>{row.msg}</td> */}
       <td style={{ width: "20rem" }}>{row.createdDate.slice(0, 10)}</td>
       <td style={{ width: "10rem" }}>{row.status}</td>
     </tr>
