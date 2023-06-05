@@ -119,7 +119,7 @@ export default function MyWaitingCase() {
             >
               <tr>
                 <th>Task</th>
-                <th>Case Title</th>
+                {/* <th>Case Title</th> */}
                 <th>Created Date</th>
                 <th>Status</th>
               </tr>
