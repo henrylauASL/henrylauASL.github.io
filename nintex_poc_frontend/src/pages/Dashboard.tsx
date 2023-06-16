@@ -53,17 +53,13 @@ export default function Dashboard() {
       .catch((err)=>({error: String(err)}))
       .then((json)=> { 
       // console.log('CaseCount', json.recordset);
-      let comCount = 0
-      let inCount = 0
-      let newCount =  0
-      let susCount = 0
 
-      comCount = +json.recordset[0].progressCount
-      inCount = +json.recordset[1].progressCount
-      newCount = +json.recordset[2].progressCount
-      susCount = +json.recordset[3].progressCount
+      let comCount = +json.recordset[0].progressCount || 0
+      let inCount = +json.recordset[1].progressCount || 0
+      let newCount = +json.recordset[2].progressCount || 0
+      let susCount = +json.recordset[3].progressCount || 0
       let totalCount = comCount + inCount + newCount + susCount
-      
+
       setCaseCount([
         {
           "label": "Total number of case",
