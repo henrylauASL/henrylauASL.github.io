@@ -139,6 +139,7 @@ export class CaseService {
       return await pool.request().query(sql);
     } catch (err) {
       console.error("Error (getCase)", err);
+      throw err;
     } finally {
       pool.close();
     }
